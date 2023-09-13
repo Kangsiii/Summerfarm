@@ -1,0 +1,15 @@
+.Navbar {
+    border: 1px solid black;
+    padding-right: 15px;
+    border-radius: 5px;
+  }
+
+.searchbar {
+  margin-left: 50%;
+  
+}
+
+.menubar-container {
+  display: flex;
+   
+}
