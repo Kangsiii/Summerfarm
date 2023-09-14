@@ -8,6 +8,12 @@ import Buy from './pages/BuyFarm';
 import Talk from './pages/TalkFarm';
 import Policy from './pages/PolicyFarm';
 import RightSidebar from './components/RightSidebar';
+import Login from './user/Loginpage';
+import Signpage from './user/Signpage';
+
+
+
+
 
 function App() {
   return (
@@ -20,6 +26,9 @@ function App() {
           <Route path="/buy" element={<Buy />} />
           <Route path="/talk" element={<Talk />} />
           <Route path="/policy" element={<Policy />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/sign" element={<Signpage />} />
+         
         </Routes>
         {/* <Footer /> */}
       </Router>
