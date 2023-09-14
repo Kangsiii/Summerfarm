@@ -1,5 +1,6 @@
 import React from 'react'
 import CardNews from '../components/CardNews'
+import Login from '../user/Logincom';
 
 function Home() {
   return (
@@ -11,8 +12,8 @@ function Home() {
         <div style={{width:'33%', }}>
           <CardNews/>
         </div>
-        <div style={{width:'33%' , backgroundColor:'blue'}}>
-          여기엔 로그인 넣을꺼임
+        <div >
+          <Login/>
         </div>        
       </div>
       <div style={{marginTop:'5%', backgroundColor:'green'}}>
