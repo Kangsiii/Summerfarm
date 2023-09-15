@@ -1,8 +1,11 @@
 import React from 'react'
+import MapComponent from '../components/MapComponent'
 
 function PolicyFarm() {
   return (
-    <div>PolicyFarm</div>
+    <div>PolicyFarm
+      <MapComponent/>
+    </div>
   )
 }
 
