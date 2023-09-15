@@ -1,6 +1,6 @@
 import React from 'react'
 import CardNews from '../components/CardNews'
-import Login from '../user/Logincom';
+import LoginBox from '../user/LoginBox';
 
 function Home() {
   return (
@@ -13,7 +13,7 @@ function Home() {
           <CardNews/>
         </div>
         <div >
-          <Login/>
+          <LoginBox />
         </div>        
       </div>
       <div style={{marginTop:'5%', backgroundColor:'green'}}>
@@ -22,5 +22,6 @@ function Home() {
     </div>
   )
 }
+
 
 export default Home;
