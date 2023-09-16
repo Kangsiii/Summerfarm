@@ -8,6 +8,7 @@ function Loginsuccess() {
   const handleLogout = () => {
     localStorage.removeItem("userType");
     localStorage.removeItem("username");
+    localStorage.removeItem("userID");
     // 로그아웃 후 다른 작업 수행 또는 페이지 리디렉션 등을 할 수 있음
     window.location.reload();
   };
@@ -15,6 +16,7 @@ function Loginsuccess() {
   // 로컬 스토리지에서 username 값을 가져옴
   const userType = localStorage.getItem("userType");
   const username = localStorage.getItem("username");
+  // const userID = localStorage.getItem("userID");
 
   let welcomeMessage = "";
     if (userType === "Farmer") {
