@@ -75,14 +75,7 @@ function Signup() {
             name="Username"
           >
             <Input name="Username" onChange={handleFormChange} />
-          </Form.Item>
-
-          <Form.Item
-            label="이메일"
-            name="Email" // "Email"로 변경
-          >
-            <Input name="Email" onChange={handleFormChange} />
-          </Form.Item>
+          </Form.Item>          
 
           <Form.Item
             label="비밀번호"

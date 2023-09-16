@@ -15,6 +15,10 @@ const registerRouter = require('./routes/register'); // 회원가입 라우터 i
 app.use('/api/register', registerRouter); // 라우터 경로 설정
 const loginRouter = require('./routes/login'); // 로그인 라우터 import
 app.use('/api/login', loginRouter);
+const getUserInfoRouter = require('./routes/getUserInfo'); 
+app.use('/api/getUserInfo', getUserInfoRouter);
+const updateUserInfoRouter = require('./routes/updateUserInfo'); 
+app.use('/api/updateUserInfo', updateUserInfoRouter);
 
 // 서버 시작
 const port = process.env.PORT || 3003;
