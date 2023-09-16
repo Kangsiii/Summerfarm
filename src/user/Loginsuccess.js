@@ -13,7 +13,15 @@ function Loginsuccess() {
   };
 
   // 로컬 스토리지에서 username 값을 가져옴
+  const userType = localStorage.getItem("userType");
   const username = localStorage.getItem("username");
+
+  let welcomeMessage = "";
+    if (userType === "Farmer") {
+  welcomeMessage = "농장주";
+    } else if (userType === "JobSeeker") {
+  welcomeMessage = "구직자";
+}
 
   // 마이페이지로 이동하는 함수
   const goToMypage = () => {
@@ -22,7 +30,7 @@ function Loginsuccess() {
 
   return (
     <div>
-      <h2>{username}님 환영합니다</h2>
+      <h2>{welcomeMessage} {username}님 환영합니다!</h2>
       <button onClick={handleLogout}>로그아웃</button>
       <button onClick={goToMypage}>마이페이지로 가기</button>
     </div>
