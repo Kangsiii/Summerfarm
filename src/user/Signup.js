@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import { Form, Input, Button, Radio } from 'antd';
 import axios from 'axios';
+import { useNavigate } from "react-router-dom";
 
 function Signup() {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     UserType: '',
     Username: '',
@@ -42,6 +44,8 @@ function Signup() {
       console.log(response.data); // 서버 응답 처리
 
       // 회원가입 성공 후 리다이렉션 또는 다른 작업 수행
+      alert('회원가입이 완료되었습니다.');
+      navigate("/");
     } catch (error) {
       console.error(error); // 오류 처리
     }

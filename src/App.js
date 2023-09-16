@@ -9,6 +9,8 @@ import Talk from './pages/TalkFarm';
 import Policy from './pages/PolicyFarm';
 import RightSidebar from './components/RightSidebar';
 import Signpage from './user/Signpage';
+import Announcement from './pages/Announcement';
+import Mypage from './user/Mypage';
 
 
 
@@ -24,7 +26,8 @@ function App() {
           <Route path="/talk" element={<Talk />} />
           <Route path="/policy" element={<Policy />} />
           <Route path="/sign" element={<Signpage />} />
-         
+          <Route path="/Announcement" element={<Announcement/>} />
+          <Route path="/mypage/:username" element={<Mypage />} />
         </Routes>
         {/* <Footer /> */}
       </Router>
