@@ -11,6 +11,33 @@ function Logincom() {
   const Movesignup = () => {
     navigate("/sign");
   }
+  const handleLogin = async (values) => {
+    try {
+      const response = await fetch('http://localhost:3003/api/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(values),
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        // 로그인 성공 시 userType과 username을 로컬 스토리지에 저장
+        localStorage.setItem('userType', data.userType);
+        localStorage.setItem('username', data.username);
+        // 로그인 후 다른 작업 수행 또는 페이지 리디렉션 등을 할 수 있음
+        window.location.reload();
+
+      } else {
+        const errorData = await response.json();
+        setLoginError(errorData.message || '로그인 실패');
+      }
+    } catch (error) {
+      console.error('로그인 오류:', error);
+      setLoginError('로그인 중 오류가 발생했습니다.');
+    }
+  };
 
   return (
     <div >
