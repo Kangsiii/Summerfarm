@@ -1,0 +1,273 @@
+여름지이 DB설계!!!
+
+
+우선....
+
+먼저 농장주or구직자 선택해서 회원가입을 받을꺼고 여기에 아이디/비밀번호/생년월일(8자리)/핸드폰번호는 기본적으로 받을꺼야. 이건 not null이어야해. 
+추가로 구직자의 경우에는 경력, 일하기를 원하는 희망지역(시/도 선택, 시,군,구 선택)을 3개, 일하기 희망하는 작물3개, 희망급여선택(상관없음-이경우는0원or얼마이상)을 받을꺼야. 이건 null이어도 돼
+농장주일 경우에는 추가로 농장이 위치한 지역(우편번호), 재배하는작물값이 필요해. 이것도 null이어도돼.
+
+마이페이지 부분에서는
+자신이 지원한 일자리를 볼 수 있고, 찜한 게시글을 볼 수 있어. 그리고 자신의 이력서를 관리할 수 있어. 이력서(경력/희망지역3곳/작물3개/희망급여)는 적어 놓으면 지원을 하면 자동으로 이 값이 농장주에게 보여지게 돼.
+거기에 자신의 정보를 수정할 수 있어. 거기에 자신이 여태 지원했던 내역/글작성했던 내역/댓글을 달았던 내역을 볼 수 있어. 또한 자신이 최근에 읽은 게시물을 확인할 수 있어.
+
+다음 부분은 일자리Farm부분이야
+여기서는 우선 게시판처럼 할꺼고 글에는 제목과 글 내용 작성자(농장주와 함께 이름-이름은 예를들어 이*식)이 들어가고 근무 조건(일하는곳 주소-농장주 주소, 작업품목(이건 카테고리검색이 가능하게), 급여, 일할 날짜, 구하는 인원 수)이 들어가 not null이어야해. 
+또한 작업하는 곳을 올릴 수 있는 사진을 올릴 수 있는 기능도 있어. 이건 null이어도돼. 그리고 그 글은 로그인을 한 사람이 지원하게 되면 지원자수가 자동으로 오르게 되고 실시간 지원자수를 확인할 수 있게돼.
+여기서 해당 게시글의 농장의 주소는 지도api를 연동해서 지도로 볼 수 있게 할거야. 또한 게시글은 로그인을 한 사람이 찜을 하게 되면 로그인을 한 사람이 마이페이지에서 확인할 수 있어. 
+지원하기 버튼을 누르면 자신의 이력서를 불러오는데 이력서(경력/희망지역3곳/작물3개/희망급여)를 적었다면 자동으로 불러와. 이력서는 유저 모두가 가지긴 하지만 그 안에 값은 null이 가능해. 지원할땐 이력서와 함께 자신이 한줄로 적고싶은 말을 적고, 지원할 수 있게 할거야.
+농장주는 자신의 게시글에서 지원자 현황을 볼 수 있고 각 지원자의 이름/ 생년월일/ 핸드폰번호/ 이력서를 볼 수 있어. 여기서 전화번호로 연락을 개인적으로 해서 인터뷰라던지 면접을 한 후에 지원자를 선택할 수 있어. 지원자수에 맞게 모두 선택이 되었다면 게시글은 구인완료가 되어서 게시글 목록에서 안보이게 돼.
+
+다음 직거래 Farm
+여기도 게시판 형식이야. 게시판에는 제목과 작성자(ex-농장주/구직자 이*식) 품목을 선택(카테고리 필수) 후 농작물 가격과 함께 농산물 정보(사진/재배지역/수확일/상호-null가능)를 기입할 수 있어. 그리고 추가 설명글을 올리고 게시글을 올릴 수 있어. 게다가 찜기능도 여기에도 있어. 여기엔 댓글을 달 수 있어.
+댓글에도 역시 작성자(ex-구직자 안*희)이름과 함께 댓글 내용이 들어가. 댓글의 갯수는 0개부터 10개가 넘어가면 10+로 기록될꺼야.
+
+소통Farm도 있어
+소통Farm은 정말 게시판형식이고 자신의 꿀팁을 공유하는 게시판이야. 여기도 제목/게시글내용/댓글기능/찜 기능이 있어. 또한 여기는 커뮤니티기능이 전부이기 때문에 조회수도 표시할꺼야. 조회수가 많아지면 인기 게시글에 가게 될거야. 
+
+
+Users 테이블:
+
+UserID (Primary Key)
+UserType (농장주 or 구직자)
+Username
+Password (암호화된 형태로 저장)
+생년월일 (8자리 숫자)
+핸드폰번호
+
+
+JobSeekers 테이블 (구직자 정보):
+
+JobSeekerID (Primary Key)
+UserID (외래 키, Users 테이블과 연결)
+경력 (Nullable)
+희망지역1, 희망지역2, 희망지역3 (시/도, 시, 군, 구 정보를 저장, Nullable)
+희망작물1, 희망작물2, 희망작물3 (Nullable)
+희망급여 (Nullable)
+
+
+Farmers 테이블 (농장주 정보):
+
+FarmerID (Primary Key)
+UserID (외래 키, Users 테이블과 연결)
+농장지역 (우편번호, Nullable)
+재배작물 (Nullable)
+
+
+Resumes 테이블 (이력서 정보):
+
+ResumeID (Primary Key)
+UserID (외래 키, Users 테이블과 연결)
+경력 (Nullable)
+희망지역1, 희망지역2, 희망지역3 (시/도, 시, 군, 구 정보를 저장, Nullable)
+희망작물1, 희망작물2, 희망작물3 (Nullable)
+희망급여 (Nullable)
+
+
+Jobs 테이블 (일자리 정보):
+
+JobID (Primary Key)
+제목
+내용
+작성자 (UserID와 연결)
+근무조건 (주소, 작업품목, 급여, 일할 날짜, 인원 수)
+사진 (이미지 업로드, Nullable)
+신청자수 (자동으로 업데이트)
+지도정보 (지도 API 정보, Nullable)
+
+
+JobApplications 테이블 (일자리 신청 정보):
+
+ApplicationID (Primary Key)
+JobID (외래 키, Jobs 테이블과 연결)
+UserID (외래 키, Users 테이블과 연결)
+이력서ID (외래 키, Resumes 테이블과 연결, Nullable)
+지원 메시지
+상태 (선택 여부 또는 인터뷰 후 결정)
+
+
+농산물 테이블 (FarmProduce):
+
+ProduceID (Primary Key)
+농산물 이름
+농산물 설명
+카테고리 (과일, 채소, 곡물 등) Nullable
+가격 Nullable
+수확 시기 Nullable
+상호 (판매자 또는 생산자) Nullable
+사진 (농산물 사진, Nullable)
+
+
+직거래Farm 게시물 테이블 (DirectTrade):
+
+TradeID (Primary Key)
+제목
+작성자 (UserID와 연결)
+품목 (농산물 테이블의 ProduceID를 참조)
+가격
+농산물 정보 (사진, 수확지역, 수확일, 상호, Nullable)
+
+
+직거래Farm 댓글 테이블 (DirectTradeComments):
+
+CommentID (Primary Key)
+TradeID (외래 키, DirectTrade 테이블과 연결)
+작성자 (UserID와 연결)
+내용
+
+
+소통Farm 게시물 테이블 (Community):
+
+PostID (Primary Key)
+제목
+작성자 (UserID와 연결)
+내용
+조회수
+
+
+소통Farm 댓글 테이블 (CommunityComments):
+
+CommentID (Primary Key)
+PostID (외래 키, Community 테이블과 연결)
+작성자 (UserID와 연결)
+내용
+
+
+-- Users 테이블 생성
+CREATE TABLE Users (
+    UserID INT PRIMARY KEY AUTO_INCREMENT,
+    UserType VARCHAR(255) NOT NULL,
+    Username VARCHAR(255),
+    Password VARCHAR(255),
+    Birthdate CHAR(8),
+    PhoneNumber VARCHAR(20)
+);
+
+-- JobSeekers 테이블 생성
+CREATE TABLE JobSeekers (
+    JobSeekerID INT PRIMARY KEY AUTO_INCREMENT,
+    UserID INT,
+    FOREIGN KEY (UserID) REFERENCES Users(UserID),
+    Experience TEXT,
+    DesiredLocation1 VARCHAR(255),
+    DesiredLocation2 VARCHAR(255),
+    DesiredLocation3 VARCHAR(255),
+    DesiredCrops1 VARCHAR(255),
+    DesiredCrops2 VARCHAR(255),
+    DesiredCrops3 VARCHAR(255),
+    DesiredSalary DECIMAL(10, 2),
+    UNIQUE(UserID)
+);
+
+-- Farmers 테이블 생성
+CREATE TABLE Farmers (
+    FarmerID INT PRIMARY KEY AUTO_INCREMENT,
+    UserID INT,
+    FOREIGN KEY (UserID) REFERENCES Users(UserID),
+    FarmLocation VARCHAR(255),
+    CultivatedCrops TEXT,
+    UNIQUE(UserID)
+);
+
+-- Resumes 테이블 생성
+CREATE TABLE Resumes (
+    ResumeID INT PRIMARY KEY AUTO_INCREMENT,
+    UserID INT,
+    FOREIGN KEY (UserID) REFERENCES Users(UserID),
+    Experience TEXT,
+    DesiredLocation1 VARCHAR(255),
+    DesiredLocation2 VARCHAR(255),
+    DesiredLocation3 VARCHAR(255),
+    DesiredCrops1 VARCHAR(255),
+    DesiredCrops2 VARCHAR(255),
+    DesiredCrops3 VARCHAR(255),
+    DesiredSalary DECIMAL(10, 2),
+    UNIQUE(UserID)
+);
+
+-- Jobs 테이블 생성
+CREATE TABLE Jobs (
+    JobID INT PRIMARY KEY AUTO_INCREMENT,
+    Title VARCHAR(255),
+    Content TEXT,
+    AuthorID INT,
+    FOREIGN KEY (AuthorID) REFERENCES Users(UserID),
+    WorkConditions TEXT NOT NULL,
+    PhotoURL VARCHAR(255),
+    ApplicantsCount INT DEFAULT 0,
+    MapInfo VARCHAR(255),
+    PostingTime TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    ExpiryDate DATE,
+    UNIQUE(Title)
+);
+
+-- JobApplications 테이블 생성
+CREATE TABLE JobApplications (
+    ApplicationID INT PRIMARY KEY AUTO_INCREMENT,
+    JobID INT,
+    FOREIGN KEY (JobID) REFERENCES Jobs(JobID),
+    UserID INT,
+    FOREIGN KEY (UserID) REFERENCES Users(UserID),
+    ResumeID INT,
+    FOREIGN KEY (ResumeID) REFERENCES Resumes(ResumeID),
+    ApplicationMessage TEXT,
+    Status VARCHAR(255),
+    UNIQUE(JobID, UserID)
+);
+
+-- 농산물 테이블 생성
+CREATE TABLE FarmProduce (
+    ProduceID INT PRIMARY KEY AUTO_INCREMENT,
+    ProduceName VARCHAR(255),
+    ProduceDescription TEXT,
+    Category VARCHAR(255),
+    Price DECIMAL(10, 2),
+    HarvestSeason VARCHAR(255),
+    ProducerName VARCHAR(255),
+    PhotoURL VARCHAR(255)
+);
+
+-- 직거래Farm 게시물 테이블 생성
+CREATE TABLE DirectTrade (
+    TradeID INT PRIMARY KEY AUTO_INCREMENT,
+    Title VARCHAR(255),
+    AuthorID INT,
+    FOREIGN KEY (AuthorID) REFERENCES Users(UserID),
+    ProduceID INT,
+    FOREIGN KEY (ProduceID) REFERENCES FarmProduce(ProduceID),
+    Price DECIMAL(10, 2),
+    ProduceInfo TEXT,
+    PhotoURL VARCHAR(255),
+    PostingTime TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- 직거래Farm 댓글 테이블 생성
+CREATE TABLE DirectTradeComments (
+    CommentID INT PRIMARY KEY AUTO_INCREMENT,
+    TradeID INT,
+    FOREIGN KEY (TradeID) REFERENCES DirectTrade(TradeID),
+    UserID INT,
+    FOREIGN KEY (UserID) REFERENCES Users(UserID),
+    CommentText TEXT
+);
+
+-- 소통Farm 게시물 테이블 생성
+CREATE TABLE Community (
+    PostID INT PRIMARY KEY AUTO_INCREMENT,
+    Title VARCHAR(255),
+    AuthorID INT,
+    FOREIGN KEY (AuthorID) REFERENCES Users(UserID),
+    Content TEXT,
+    Views INT DEFAULT 0,
+    PostingTime TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- 소통Farm 댓글 테이블 생성
+CREATE TABLE CommunityComments (
+    CommentID INT PRIMARY KEY AUTO_INCREMENT,
+    PostID INT,
+    FOREIGN KEY (PostID) REFERENCES Community(PostID),
+    UserID INT,
+    FOREIGN KEY (UserID) REFERENCES Users(UserID),
+    CommentText TEXT
+);
