@@ -11,7 +11,6 @@ function Logincom() {
   const Movesignup = () => {
     navigate("/sign");
   }
-
   const handleLogin = async (values) => {
     try {
       const response = await fetch('http://localhost:3003/api/login', {
@@ -27,9 +26,10 @@ function Logincom() {
         // 로그인 성공 시 userType과 username을 로컬 스토리지에 저장
         localStorage.setItem('userType', data.userType);
         localStorage.setItem('username', data.username);
+        localStorage.setItem('userID', data.userID);
         // 로그인 후 다른 작업 수행 또는 페이지 리디렉션 등을 할 수 있음
         window.location.reload();
-        
+
       } else {
         const errorData = await response.json();
         setLoginError(errorData.message || '로그인 실패');
