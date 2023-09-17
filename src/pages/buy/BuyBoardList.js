@@ -7,6 +7,7 @@ function BuyBoardList() {
   // 게시물 목록을 저장할 상태
   const [posts, setPosts] = useState([]);
   const [selectedPost, setSelectedPost] = useState(null);
+  const [filteredPosts, setFilteredPosts] = useState([]); // 검색 결과를 저장할 상태
 
   const formatDate = (dateString) => {
     const options = { month: 'long', day: 'numeric' };
@@ -21,6 +22,7 @@ function BuyBoardList() {
       .then((data) => {
         // 받아온 데이터를 상태에 저장
         setPosts(data);
+        setFilteredPosts(data); // 초기에는 모든 게시물을 표시
       })
       .catch((error) => {
         console.error('데이터를 불러오는 중 오류가 발생했습니다:', error);
@@ -33,11 +35,21 @@ function BuyBoardList() {
     setSelectedPost({ ...post, TradeID: post.TradeID }); // TradeID를 설정
   };
 
+  // 검색 기능을 수행하는 함수
+  const handleSearch = (searchTerm) => {
+    // 검색어를 이용하여 게시물 목록을 필터링
+    const filtered = posts.filter((post) =>
+      post.Title.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+    setFilteredPosts(filtered); // 필터링된 결과를 저장
+  };
+
   return (
     <div className="buy-board-list-container">
       {!selectedPost && (
         <>
           <h2>게시물 목록</h2>
+          
           <table className="buy-board-table">
             <thead>
               <tr>
@@ -47,7 +59,7 @@ function BuyBoardList() {
               </tr>
             </thead>
             <tbody>
-              {posts.map((post) => (
+              {filteredPosts.map((post) => (
                 <tr key={post.id} onClick={() => handlePostClick(post)}>
                   <td>{post.Title}</td>
                   <td>{post.Username}</td>
@@ -56,7 +68,7 @@ function BuyBoardList() {
               ))}
             </tbody>
           </table>
-          <BuySearchBar />
+          <BuySearchBar onSearch={handleSearch} />
         </>
       )}
       {selectedPost && <BuyPostDetail post={selectedPost} />}

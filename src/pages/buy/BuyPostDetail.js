@@ -47,6 +47,7 @@ function BuyPostDetail({ post }) {
         <p>수확시기: {postDetail.HarvestSeason}</p>
         <p>상호명: {postDetail.ProducerName}</p>
         <p>내용: {postDetail.ProduceInfo}</p>
+        <p>사진URL: {postDetail.PhotoURL}</p>
       </div>
       <button onClick={handleReloadPage}>뒤로가기</button>
     </div>

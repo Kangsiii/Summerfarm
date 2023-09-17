@@ -12,21 +12,36 @@ function BuyPostForm() {
   });
 
   useEffect(() => {
+    // 주기적으로 로컬 스토리지에서 ProduceID 값을 가져오고 업데이트
+    const intervalId = setInterval(() => {
+      const updatedProduceID = localStorage.getItem('ProduceID');
+      setPostInfo((prevInfo) => ({
+        ...prevInfo,
+        ProduceID: updatedProduceID,
+      }));
+    }, 1000); // 1초마다 확인
+
+    // 컴포넌트가 언마운트될 때 interval 정리
+    return () => clearInterval(intervalId);
+  }, []);
+
+  useEffect(() => {
     // 로컬 스토리지에서 사용자 ID와 농산물 ID 가져오기
     const AuthorID = localStorage.getItem('userID');
-    // const ProduceID = localStorage.getItem('ProduceID');
+    const ProduceID = localStorage.getItem('ProduceID');
         
     // 현재 시간을 생성
     const currentDate = new Date();
     
     // 가져온 값들을 postInfo에 설정
-    setPostInfo({
-      ...postInfo,
+    setPostInfo((prevInfo) => ({
+      ...prevInfo,
       AuthorID: AuthorID,
-      ProduceID: localStorage.getItem('ProduceID'),
+      ProduceID: ProduceID,
       PostingTime: currentDate.toISOString(), // 현재 시간을 ISO 형식으로 저장
-    });
+    }));
   }, []);
+
 
   const handleTitleChange = (e) => {
     setPostInfo({ ...postInfo, Title: e.target.value });
@@ -50,8 +65,7 @@ function BuyPostForm() {
         // 게시글 작성 성공 시 로컬 스토리지의 ProduceID 삭제
         localStorage.removeItem('ProduceID');
         console.log('게시물이 성공적으로 작성되었습니다.');
-        // 작성 완료 후 홈페이지로 리다이렉트 또는 다른 작업 수행
-        // 예: history.push('/')를 사용하여 홈페이지로 이동
+        window.location.reload();
       } else {
         // 서버 응답이 실패했을 때 처리
         console.error('게시물 작성 실패');
