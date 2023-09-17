@@ -54,11 +54,15 @@ function ProduceForm() {
           }
         }
       };
+      const handleReloadPage = () => {
+        window.location.reload(); // 현재 페이지를 새로 고침
+      };
       
 
   return (
     <div>
       <h2>농산물 등록</h2>
+      <button onClick={handleReloadPage}>뒤로가기</button>
       <form>
         <div>
           <label>농산물 이름 (필수)</label>

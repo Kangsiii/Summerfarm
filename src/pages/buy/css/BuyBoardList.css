@@ -1,0 +1,37 @@
+/* BuyBoardList.css */
+
+.buy-board-list-container {
+    font-family: Arial, sans-serif;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f0f0f0;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  }
+  
+  .buy-board-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+  }
+  
+  .buy-board-table th, .buy-board-table td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .buy-board-table th {
+    background-color: #333;
+    color: white;
+  }
+  
+  .buy-board-table tbody tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+  
+  .buy-board-table tbody tr:hover {
+    background-color: #ddd;
+  }
+  
