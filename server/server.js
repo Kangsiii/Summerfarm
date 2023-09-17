@@ -23,6 +23,10 @@ const producerregisterRouter = require('./routes/producerregister');
 app.use('/api/producerregister', producerregisterRouter);
 const buypostRouter = require('./routes/buypost'); 
 app.use('/api/buypost', buypostRouter);
+const buypostlistRouter = require('./routes/buypostlist'); 
+app.use('/api/buypostlist', buypostlistRouter);
+const buypostDetailRouter = require('./routes/buypostDetail');
+app.use('/api/buypostDetail', buypostDetailRouter);
 
 // 서버 시작
 const port = process.env.PORT || 3003;

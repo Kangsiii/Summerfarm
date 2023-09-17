@@ -14,6 +14,7 @@ import Mypage from './user/Mypage';
 
 
 
+
 function App() {
   return (
     <Router>
@@ -27,7 +28,7 @@ function App() {
           <Route path="/policy" element={<Policy />} />
           <Route path="/sign" element={<Signpage />} />
           <Route path="/Announcement" element={<Announcement/>} />
-          <Route path="/mypage/:username" element={<Mypage />} />
+          <Route path="/mypage/:username" element={<Mypage />} />          
         </Routes>
         {/* <Footer /> */}
       </Router>
