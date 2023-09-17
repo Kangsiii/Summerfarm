@@ -19,6 +19,10 @@ const getUserInfoRouter = require('./routes/getUserInfo');
 app.use('/api/getUserInfo', getUserInfoRouter);
 const updateUserInfoRouter = require('./routes/updateUserInfo'); 
 app.use('/api/updateUserInfo', updateUserInfoRouter);
+const producerregisterRouter = require('./routes/producerregister'); 
+app.use('/api/producerregister', producerregisterRouter);
+const buypostRouter = require('./routes/buypost'); 
+app.use('/api/buypost', buypostRouter);
 
 // 서버 시작
 const port = process.env.PORT || 3003;

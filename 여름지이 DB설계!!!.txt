@@ -104,7 +104,6 @@ TradeID (Primary Key)
 제목
 작성자 (UserID와 연결)
 품목 (농산물 테이블의 ProduceID를 참조)
-가격
 농산물 정보 (사진, 수확지역, 수확일, 상호, Nullable)
 
 
@@ -225,6 +224,8 @@ CREATE TABLE FarmProduce (
     HarvestSeason VARCHAR(255),
     ProducerName VARCHAR(255),
     PhotoURL VARCHAR(255)
+    UserID INT, -- 판매자의 UserID 추가
+    FOREIGN KEY (UserID) REFERENCES Users(UserID)
 );
 
 -- 직거래Farm 게시물 테이블 생성
@@ -235,9 +236,7 @@ CREATE TABLE DirectTrade (
     FOREIGN KEY (AuthorID) REFERENCES Users(UserID),
     ProduceID INT,
     FOREIGN KEY (ProduceID) REFERENCES FarmProduce(ProduceID),
-    Price DECIMAL(10, 2),
-    ProduceInfo TEXT,
-    PhotoURL VARCHAR(255),
+    ProduceInfo TEXT,    
     PostingTime TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
@@ -271,3 +270,15 @@ CREATE TABLE CommunityComments (
     FOREIGN KEY (UserID) REFERENCES Users(UserID),
     CommentText TEXT
 );
+
+이미 위에과정 했을때 추가할꺼면
+Use Summerfarm;
+
+ALTER TABLE FarmProduce
+ADD COLUMN UserID INT,
+ADD CONSTRAINT fk_User FOREIGN KEY (UserID) REFERENCES Users(UserID);
+
+ALTER TABLE DirectTrade
+DROP COLUMN Price;
+DROP COLUMN PhotoURL;
+FarmProduce MODIFY COLUMN Price varchar(99);
