@@ -1,6 +1,6 @@
 const db = require('../db.js');
 
-exports.buypostDetail = (req, res) => {
+exports.workpostDetail = (req, res) => {
   const JobID  = req.params.JobID; 
   
 
