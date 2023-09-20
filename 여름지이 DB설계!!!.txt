@@ -280,5 +280,6 @@ ADD CONSTRAINT fk_User FOREIGN KEY (UserID) REFERENCES Users(UserID);
 
 ALTER TABLE DirectTrade
 DROP COLUMN Price;
+ALTER TABLE DirectTrade
 DROP COLUMN PhotoURL;
-FarmProduce MODIFY COLUMN Price varchar(99);
+ALTER TABLE FarmProduce MODIFY COLUMN Price varchar(99);
