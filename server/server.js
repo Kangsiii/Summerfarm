@@ -27,6 +27,12 @@ const buypostlistRouter = require('./routes/buypostlist');
 app.use('/api/buypostlist', buypostlistRouter);
 const buypostDetailRouter = require('./routes/buypostDetail');
 app.use('/api/buypostDetail', buypostDetailRouter);
+const workpostlistRouter = require('./routes/workpostlist'); 
+app.use('/api/workpostlist', workpostlistRouter);
+const workpostformRouter = require('./routes/workpostform'); 
+app.use('/api/workpostform', workpostformRouter);
+const workpostdetailRouter = require('./routes/workpostdetail');
+app.use('/api/workpostdetail', workpostdetailRouter);
 
 // 서버 시작
 const port = process.env.PORT || 3003;
