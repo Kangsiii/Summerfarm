@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const workpostdetailController = require('../controllers/workpostdetailController');
+const workpostDetailController = require('../controllers/workpostDetailController');
 
-router.get('/:JobID', workpostdetailController.workpostdetail);
+router.get('/:JobID', workpostDetailController.workpostDetail);
 
 module.exports = router;

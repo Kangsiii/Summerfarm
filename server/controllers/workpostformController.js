@@ -1,6 +1,6 @@
 const db = require('../db.js');
 
-exports.buypost = (req, res) => {
+exports.workpostform = (req, res) => {
   const { AuthorID, Title, Content, PostingTime } = req.body;
   
   // PostingTime 값을 MySQL 형식으로 변환

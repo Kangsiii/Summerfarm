@@ -1,6 +1,6 @@
 const db = require('../db.js');
 
-exports.buypostlist = (req, res) => {
+exports.workpostlist = (req, res) => {
   // 데이터베이스에서 직거래 게시물 목록을 조회하는 쿼리
   const sql = 'SELECT JobID, Title, AuthorID, PostingTime FROM jobs';
 

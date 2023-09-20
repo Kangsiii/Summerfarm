@@ -31,8 +31,8 @@ const workpostlistRouter = require('./routes/workpostlist');
 app.use('/api/workpostlist', workpostlistRouter);
 const workpostformRouter = require('./routes/workpostform'); 
 app.use('/api/workpostform', workpostformRouter);
-const workpostdetailRouter = require('./routes/workpostdetail');
-app.use('/api/workpostdetail', workpostdetailRouter);
+const workpostDetailRouter = require('./routes/workpostDetail');
+app.use('/api/workpostDetail', workpostDetailRouter);
 
 // 서버 시작
 const port = process.env.PORT || 3003;
