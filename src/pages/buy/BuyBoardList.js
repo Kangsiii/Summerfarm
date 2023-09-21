@@ -9,6 +9,7 @@ function BuyBoardList() {
   const [selectedPost, setSelectedPost] = useState(null);
   const [filteredPosts, setFilteredPosts] = useState([]); // 검색 결과를 저장할 상태
 
+  //월, 일로만 보여주려고 
   const formatDate = (dateString) => {
     const options = { month: 'long', day: 'numeric' };
     return new Date(dateString).toLocaleDateString('ko-KR', options);

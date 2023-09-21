@@ -1,4 +1,6 @@
 import React, {useEffect} from 'react'
+import WorkPostForm from './work/WorkPostForm';
+
 
 function WorkFarm() {
   useEffect(() => {
@@ -11,9 +13,18 @@ function WorkFarm() {
       window.location.href = '/'; // 홈 화면으로 리디렉트
     }
   }, []);
+
+  const handleWorkPostFormClick = () => {
+    window.location.href= '/WorkPostForm';
+  }
+
+  
   return (
-    <div>WorkFarm</div>
-  )
+    <div>
+      <h1>일자리Farm</h1>
+      <button onClick={handleWorkPostFormClick}>글쓰기</button>
+    </div>
+  );
 }
 
-export default WorkFarm
+export default WorkFarm;

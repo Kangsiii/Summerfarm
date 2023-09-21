@@ -1,7 +1,7 @@
 const db = require('../db.js');
 
 exports.workpostform = (req, res) => {
-  const { AuthorID, Title, Content, PostingTime } = req.body;
+  const { AuthorID, Title, Content, PostingTime, WorkConditions } = req.body;
   
   // PostingTime 값을 MySQL 형식으로 변환
   const postingTime = new Date(PostingTime).toISOString().slice(0, 19).replace('T', ' ');
@@ -15,13 +15,13 @@ exports.workpostform = (req, res) => {
 
   // 데이터베이스에 직거래 게시글 정보를 삽입
   const sql = `
-    INSERT INTO directtrade ( Title, AuthorID, Content, PostingTime)
+    INSERT INTO directtrade ( Title, AuthorID, Content, PostingTime, WorkConditions)
     VALUES (?, ?, ?, ?)
   `;
 
   db.query(
     sql,
-    [ Title, AuthorID, Content, postingTime], // 수정된 부분
+    [ Title, AuthorID, Content, postingTime, WorkConditions], // 수정된 부분
     (err, result) => {
       if (err) {
         console.error('DB 저장 실패:', err);
