@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import ReactQuill from 'react-quill';
-import 'react-quill/dist/quill.snow.css';
+// import ReactQuill from 'react-quill';
+// import 'react-quill/dist/quill.snow.css';
 
 function BuyPostForm() {
   const [postInfo, setPostInfo] = useState({
@@ -90,7 +90,7 @@ function BuyPostForm() {
         </div>
         <div>
           <label>내용</label>
-          <ReactQuill
+          <textarea
             value={postInfo.ProduceInfo}
             onChange={handleContentChange}
           />

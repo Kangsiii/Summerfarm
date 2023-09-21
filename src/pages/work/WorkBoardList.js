@@ -1,3 +1,4 @@
+import Search from 'antd/es/input/Search';
 import { response } from 'express';
 import React, { useEffect, useState } from 'react';
 
@@ -23,13 +24,20 @@ function WorkBoardList() {
   },[]);
   
   const handlePostClick = (post) => {
-    setSelectedPost({ ...post,JobID})
-  }
+    setSelectedPost({ ...post,JobID: post.JobID});
+  };
 
+  const handleSearch = (SearchWork) => {
+    const filtered = posts.filter((posts) =>
+    post.title.toLowerCase().includes(SearchWork.toLowerCase()));
+    setFilteredPosts(filtered); 
+  };
 
-
+  
     return (
-    <div>WorkBoardList</div>
+    <div className="">
+
+    </div>
   )
 }
 

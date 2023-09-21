@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import ReactQuill from 'react-quill'
-import 'react-quill/dist/quill.snow.css'
+// import ReactQuill from 'react-quill'
+// import 'react-quill/dist/quill.snow.css'
 // 'react-quill/dist/react-quill.css';
 // 일자리팜 게시글 작성
 function WorkPostForm() {
@@ -64,7 +64,7 @@ function WorkPostForm() {
             </div>
             <div>
                 <label>내용</label>
-                <ReactQuill
+                <textarea
                     value={postInfo.Content}
                     onChange={(e) => setPostInfo({ ... postInfo, Content: e.target.value})}
                 />
