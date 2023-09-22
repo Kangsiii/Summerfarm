@@ -16,7 +16,7 @@ exports.workpostlist = (req, res) => {
     // 이제 각 게시물의 작성자 Username 값을 조회하는 쿼리
     const authorIDList = posts.map((post) => post.AuthorID).join(',');
 
-    const sql2 = `SELECT UserID, Username FROM users WHERE UserID IN (${authorIDList})`;
+    const sql2 = authorIDList ? `SELECT UserID, Username FROM users WHERE UserID IN (${authorIDList})` : null;
 
     db.query(sql2, (err, userResults) => {
       if (err) {

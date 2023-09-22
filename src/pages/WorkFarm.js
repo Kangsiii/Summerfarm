@@ -1,5 +1,6 @@
 import React, {useEffect} from 'react'
 import WorkPostForm from './work/WorkPostForm';
+import WorkBoardList from './work/WorkBoardList';
 
 
 function WorkFarm() {
@@ -22,6 +23,7 @@ function WorkFarm() {
   return (
     <div>
       <h1>일자리Farm</h1>
+      <WorkBoardList/>
       <button onClick={handleWorkPostFormClick}>글쓰기</button>
     </div>
   );
